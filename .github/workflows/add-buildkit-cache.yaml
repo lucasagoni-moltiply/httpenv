@@ -1,4 +1,4 @@
-name: basic docker build
+name: add buildkit cache
 
 on:
   push:
@@ -16,9 +16,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+      # adding buildKit cache to spped up github actions      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Docker build
         uses: docker/build-push-action@v6
         with:
           push: ${{ github.event_name != 'pull_request' }}
           tags: bretfisher/docker-ci-automation:latest,bretfisher/docker-ci-automation:01
+          cache-from: type=registry,ref=user/app:latest
+          cache-to: type=inline
