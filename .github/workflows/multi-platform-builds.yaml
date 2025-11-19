@@ -1,4 +1,4 @@
-name: add buildkit cache
+name: multi platform builds
 
 on:
   push:
@@ -16,7 +16,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      # adding buildKit cache to spped up github actions      
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
