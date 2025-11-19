@@ -1,4 +1,4 @@
-name: multi platform builds
+name: Multi Platform Builds
 
 on:
   push:
@@ -28,6 +28,6 @@ jobs:
         with:
           platforms: linux/amd64, linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: bretfisher/docker-ci-automation:latest,bretfisher/docker-ci-automation:01
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/docker-ci-automation:latest,${{ secrets.DOCKERHUB_USERNAME }}/docker-ci-automation:01          
           cache-from: type=gha
           cache-to: type=gha,mode=max

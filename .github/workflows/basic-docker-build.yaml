@@ -1,4 +1,4 @@
-name: basic docker build
+name: Basic Docker Build
 
 on:
   push:
@@ -21,4 +21,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: ${{ github.event_name != 'pull_request' }}
-          tags: bretfisher/docker-ci-automation:latest,bretfisher/docker-ci-automation:01
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/docker-ci-automation:latest,${{ secrets.DOCKERHUB_USERNAME }}/docker-ci-automation:01
